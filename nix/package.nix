@@ -22,7 +22,7 @@ let
   pname = "t3code";
   version = packageJson.version;
   workspaceNodeModules = stdenv.mkDerivation {
-    pname = "${pname}-workspace-node-modules";
+    pname = "${pname}-workspace-node-modules-cross-platform";
     inherit version src;
 
     nativeBuildInputs = [
@@ -40,7 +40,15 @@ let
       export BUN_INSTALL_CACHE_DIR="$(mktemp -d)"
       export ELECTRON_SKIP_BINARY_DOWNLOAD=1
 
-      bun install --frozen-lockfile --ignore-scripts --no-progress
+      bun install \
+        --cpu="*" \
+        --frozen-lockfile \
+        --ignore-scripts \
+        --no-progress \
+        --os="*"
+
+      bun --bun ./nix/scripts/canonicalize-node-modules.ts
+      bun --bun ./nix/scripts/normalize-bun-binaries.ts
 
       runHook postBuild
     '';
@@ -62,7 +70,7 @@ let
     '';
 
     outputHashMode = "recursive";
-    outputHash = "sha256-5CI0WZ2MojUnG9LMgEp6raqj7y8wZ3tl+kabar1KMa0=";
+    outputHash = "sha256-fyyISTDv9Y/CDQsxzK1gp0DzL5+IhfJtMtda7tkxfcE=";
   };
 in
 stdenv.mkDerivation (finalAttrs: {
