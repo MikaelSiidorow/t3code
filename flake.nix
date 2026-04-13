@@ -45,6 +45,7 @@
               nodejs_24
               electron_40
               jq
+              python3
               nixfmt-tree
             ];
           };

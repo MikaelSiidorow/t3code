@@ -39,6 +39,18 @@ brew install --cask t3-code
 yay -S t3code-bin
 ```
 
+### Install from a flake input
+
+```nix
+{
+  inputs.t3code.url = "github:mikaelsiidorow/t3code";
+
+  home.packages = [
+    inputs.t3code.packages.${pkgs.stdenv.hostPlatform.system}.default
+  ];
+}
+```
+
 ## Some notes
 
 We are very very early in this project. Expect bugs.
