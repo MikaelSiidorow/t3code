@@ -70,7 +70,7 @@ let
     '';
 
     outputHashMode = "recursive";
-    outputHash = "sha256-fyyISTDv9Y/CDQsxzK1gp0DzL5+IhfJtMtda7tkxfcE=";
+    outputHash = "sha256-9y5EblGlh80ksQ5kgJViKDLIT0XIRndM9yYXpXkiE+0=";
   };
 in
 stdenv.mkDerivation (finalAttrs: {
@@ -114,7 +114,7 @@ stdenv.mkDerivation (finalAttrs: {
 
     bun run build:desktop
 
-    test -f apps/desktop/dist-electron/main.js
+    test -f apps/desktop/dist-electron/main.cjs
     test -f apps/server/dist/bin.mjs
     test -f apps/server/dist/client/index.html
 
@@ -162,7 +162,7 @@ stdenv.mkDerivation (finalAttrs: {
       private: true,
       description: "T3 Code desktop build",
       author: "T3 Tools",
-      main: "apps/desktop/dist-electron/main.js",
+      main: "apps/desktop/dist-electron/main.cjs",
       productName: desktopPackageJson.productName ?? "T3 Code (Alpha)",
       build: {
         appId: "com.t3tools.t3code",
